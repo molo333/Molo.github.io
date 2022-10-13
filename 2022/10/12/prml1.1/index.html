@@ -33,7 +33,7 @@
 <h3 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h3><p>一维高斯分布:</p>
 <script type="math/tex; mode=display">N(x \vert u,\sigma^2) = \frac {1} {(2\pi\sigma^2)^{\frac 1 2}} exp(-\frac{1}{2\sigma^2}(x-u)^2)</script><p>u为均值;$\sigma^2$为方差<br>D维高斯分布:<br><img src="/2022/10/12/prml1.1/15.png" alt><br>高斯分布在对x积分为1。</p>
 <script type="math/tex; mode=display">\int N(x \vert \mu \sigma)dx = 1</script><p>此时我们有数据集X,有n个元素x1,x2….xn均从一个高斯分布里抽取,但该高斯均值和方差未知,我们要从数据集里确定这些参数<br>一般的方法是最大化对数似然函数</p>
-<script type="math/tex; mode=display">p(D \vert \mu,\sigma^2) = \prod ^N_{n=1}N(x_n \vert \mu,\sigma^2)</script><script type="math/tex; mode=display">lnp(D \vert \mu,\sigma^2) = -\frac{1}{2 \sigma^2}\sum^N_{n=1}(x_-\mu)^2 - \frac{N}{2}ln\sigma^2 - \frac{N}{2}ln(2\pi)</script><p>对u求导使之得0,可求得最大似然解</p>
+<script type="math/tex; mode=display">p(D \vert \mu,\sigma^2) = \prod ^N_{n=1}N(x_n \vert \mu,\sigma^2)</script><script type="math/tex; mode=display">lnp(D \vert \mu,\sigma^2) = -\frac{1}{2 \sigma^2}\sum^N_{n=1}(x_n-\mu)^2 - \frac{N}{2}ln\sigma^2 - \frac{N}{2}ln(2\pi)</script><p>对u求导使之得0,可求得最大似然解</p>
 <script type="math/tex; mode=display">\mu_{ML} = \frac{1}{N}\sum^N_{n=1}x_n</script><p>同理有方差最大似然解（样本方差）:</p>
 <script type="math/tex; mode=display">\sigma^2_{ML} = \frac 1 N \sum^N_{n=1}(x-\mu_{ML})^2</script><p>但是最大似然方法会系统化低估分布方差,由上可知方差为数据集的函数,我们可以算出样本方差对数据集的期望</p>
 <p><img src="/2022/10/12/prml1.1/1.png" alt><br>上用到$E[x^2] = var[x] + (E[x])^2 $<br>a,b独立分布时$E[a*b] = E[a]E[b] $<br>最大似然偏移问题时过拟合问题的核心。</p>
