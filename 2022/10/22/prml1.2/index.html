@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="prml第一章笔记下"><meta name="keywords" content=""><meta name="author" content="molo"><meta name="copyright" content="molo"><title>prml第一章笔记下 | Molo</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="toc-number">1.</span> <span class="toc-text">模型选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B4%E5%BA%A6%E7%81%BE%E9%9A%BE"><span class="toc-number">2.</span> <span class="toc-text">维度灾难</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B3%E7%AD%96%E8%AE%BA"><span class="toc-number">3.</span> <span class="toc-text">决策论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E6%96%AD%E4%B8%8E%E5%86%B3%E7%AD%96"><span class="toc-number">3.1.</span> <span class="toc-text">推断与决策</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98"><span class="toc-number">3.2.</span> <span class="toc-text">回归问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E5%88%86%E6%B3%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">变分法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">信息论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%86%B5"><span class="toc-number">4.1.</span> <span class="toc-text">熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E5%88%86%E7%86%B5"><span class="toc-number">4.2.</span> <span class="toc-text">微分熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%86%B5"><span class="toc-number">4.3.</span> <span class="toc-text">条件熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E7%86%B5%EF%BC%88KL%E6%95%A3%E5%BA%A6%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">相对熵（KL散度）</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/p/2.jpg"></div><div class="author-info__name text-center">molo</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/p/1.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Molo</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right"></span></div><div id="post-info"><div id="post-title">prml第一章笔记下</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-10-22</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>2333333<br><span id="more"></span></p>
+<h2 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h2><ul>
+<li>不同的多项式的阶数，不同的正则化参数会产生不同的模型，我们需要预留一些数据用于评估不同模型的好坏。</li>
+<li>由于过拟合现象，模型在训练集表现并不能表示模型在测试集的表现。数据量大可以使用一部分数据用于评估模型好坏，而数据量小则可以采用交叉验证的方法。但交叉验证会因模型数量变多训练次数会指数型上升。<br><img src="/2022/10/22/prml1.2/p1.png" alt></li>
+</ul>
+<h2 id="维度灾难"><a href="#维度灾难" class="headerlink" title="维度灾难"></a>维度灾难</h2><ul>
+<li>输入变量越多，为描述数据复杂依存关系，不同变量要相乘，使多项式拟合系数数量大幅增加。</li>
+<li>多维空间的高斯分布的概率质量集中在表⾯附近的薄球壳上。简单来说高维高斯分布<br><img src="/2022/10/22/prml1.2/1.png" alt><br>D比较大第一个系数就比较小，需要后面的指数很大才能抵消。故都集中在表面。</li>
+</ul>
+<h2 id="决策论"><a href="#决策论" class="headerlink" title="决策论"></a>决策论</h2><p>假若我有数据x，想判断他属于Ck中哪一类。<br>我们之前可以得到$p(x,C_k)$，然后我们需要通过这个概率判断他是哪一类，这就是决策论主题。</p>
+<ul>
+<li>1.最小化错误分类率</li>
+</ul>
+<p>如果$p(x,C_1) &gt; p(x,C_2)$那就把x分到C1类，这样就可以让分类错误的概率最小。</p>
+<ul>
+<li>2.最小化期望损失</li>
+</ul>
+<p>分类错误后产生的后果不同，则最小化错误分类率不一定好。我们假设x属于j类但却分成k类会对我们造成损失$l_{jk}$ j，k相等时损失为0。则我们要最小化。</p>
+<script type="math/tex; mode=display">E[L] = \sum_k \sum_j \int_{R_j}L_{kj}p(x,C_k)dx</script><p>则就是寻找一个j使得$\sum<em>kL</em>{kj}p(x,C_k)$最小。</p>
+<p>简单来说；假设癌症诊断损失矩阵为（（0，1000），（1 ，0））你得到有癌症概率0.1，正常概率0.9你现在判断他是不是癌症就是决策论。最小化错误分类就会分正常。而最小化期望损失分类他会算损失，判断他为正常损失为0.1*1000而判断他为癌症为0.9损失故他会判断他为癌症。</p>
+<ul>
+<li>3.拒绝选项</li>
+</ul>
+<p>引入一个阈值θ，若$p(x,C_1)$小于θ，你就直接避免选择，开摆就完了。</p>
+<h3 id="推断与决策"><a href="#推断与决策" class="headerlink" title="推断与决策"></a>推断与决策</h3><p>推断就是用训练数据训练出概率模型，分类问题就是推断加决策两个阶段。但你也可以有另外的方法即学习一个函数直接他的输出就是决策。以下为三种方法：</p>
+<ul>
+<li>1.推断似然函数$p(x \vert C_k)$，然后推断先验概率$P(C_k)$，就可以通过贝叶斯得到后验概率，然后用后验进行决策。这样如果你有Ck可以推出x故又叫生成式模型。</li>
+<li>2.直接推断后验概率$p(C_k \vert x)$然后决策。为判别式模型。</li>
+<li>3.找到判别函数$f(x)$直接输入x输出类别，跟概率就没关系了。</li>
+</ul>
+<ul>
+<li><p>越往前越复杂，3虽然简单但由于和概率没关系，前面提到的最小化期望损失和拒绝选项都整不了。</p>
+</li>
+<li><p>如上述癌症例子，癌症的x光片数据可能远远少于正常的X光片。你把所有都判定为正常都可以有很高正确率，所以这时我们需要对后验概率进行一定修改。使其除以数据集类比例后乘以应用模型目标人群的先验（除以数据集里先验乘上真实先验），然后归一化。这样就可以更好做分类。这时若你用3方法没有后验概率就无法这样。</p>
+</li>
+<li><p>方法1复杂但可以求$p(x)$来进行异常检测（x概率小但你出现了可能有问题）。同时还可以搞组合模型。X光判断癌症有一个似然$p(x_1 \vert C_k)$血液判断癌症有个似然$p(x_2 \vert C_k)$然后我们知道先验$p(C_k)$就可以通过贝叶斯定理得到$p(C_k \vert x_1,x_2)$从而进行组合模型判断。</p>
+</li>
+</ul>
+<h3 id="回归问题"><a href="#回归问题" class="headerlink" title="回归问题"></a>回归问题</h3><p>这部分讲的都是分类问题，回归问题同理，相当于连续的分类问题。将上述求和变为积分最小化期望损失中的损失变为损失函数。其中有一种Minkowski loss期望为：<br><img src="/2022/10/22/prml1.2/2.png" alt><br>q = 2是平方损失函数，期望最小时y为条件均值，q = 1 是期望最小是y为中位数，q 趋向于 0 期望最小值时y条件众数。</p>
+<h4 id="变分法"><a href="#变分法" class="headerlink" title="变分法"></a>变分法</h4><ul>
+<li>泛函:函数的函数；如上面的期望损失就是找一个$y(x)$使得该值最小。此时该期望损失是$y(x)$的泛函。</li>
+</ul>
+<p>假设有一泛函：<br><img src="/2022/10/22/prml1.2/3.png" alt><br>该泛函由多元函数G积分定义，G不仅与y有关还与y的导数和x有关。但由于对x积分则F变成与x无关，与$y(x)$有关。我们给$y(x)$加上微小的扰动$\eta (x)$：<br><img src="/2022/10/22/prml1.2/4.png" alt><br>微小的扰动$\eta (x)$在积分边界为0。故可以采用分部积分得到：<br><img src="/2022/10/22/prml1.2/5.png" alt><br>驻点就是给任意微小扰动，泛函值不变。我们可以对比函数中导数的定义：<br><img src="/2022/10/22/prml1.2/7.png" alt><br>我们就可以得到使泛函F导数为0需要:<br><img src="/2022/10/22/prml1.2/6.png" alt><br>这里其实将对函数求导变成了对变量求导，对于期望损失，我们不需要导数项，仅需要第一项为$ \frac{\partial  G}{\partial y} = 0$就可。<br>回到前面的的期望损失，q = 2时使泛函导数为0有：</p>
+<script type="math/tex; mode=display">y(x) = \frac {\int tp(x,t)}{\int p(x,t)}</script><p>故期望最小值为条件均值$E[t \vert x]$。进一步，我们把平方项以下一种方式展开：<br><img src="/2022/10/22/prml1.2/8.png" alt><br>代入原式有：<br><img src="/2022/10/22/prml1.2/9.png" alt><br>$y(x)$仅在第一项中，而第二项代表的其实是噪声带来的误差，他是不可以减小的，我们只能选择一个好的$y(x)$减少第一项。</p>
+<h2 id="信息论"><a href="#信息论" class="headerlink" title="信息论"></a>信息论</h2><h3 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h3><p>如果有⼈告诉我们⼀个相当不可能的时间发⽣了，我们收到的信息要多于我们被告知某个很可能发⽣的事件发⽣时收到的信息。考虑一个离散随机变量x，当观察到x等于某个值t的时候，我们得到的信息$h(x)$取决于这件事带给我们的惊讶程度。也就是说取决于$p(x = t)$，如果这个概率很大，我们得不到什么信息反之我们会得到很多信息。不相关的x，y的观测一起给我们的信息是$h(x,y) = h(x)+h(y)$而相互独立的两时间概率是$p(x,y)=p(x)p(y)$故我们得到的信息应该为概率的<strong>负对数</strong>。</p>
+<script type="math/tex; mode=display">h(x) = -log_2p(x)</script><p>上面为一个信息的信息量，平均信息量为：</p>
+<script type="math/tex; mode=display">H[x] = -\sum_x p(x)log_2p(x)</script><p>这里的H叫x的熵（entropy）。</p>
+<ul>
+<li>均匀分布熵大于非均匀分布<br>假设x有四种可能状态（a，b，c，d）同等概率下<script type="math/tex; mode=display">H[X] = - 4*\frac{1}{4}log_2\frac{1}{4} = 2bits</script>如果概率分别是（1/2,1/4,1/8,1/8）<script type="math/tex; mode=display">H[X] = - \frac{1}{2}log_2\frac{1}{2} -  \frac{1}{4}log_2\frac{1}{4}
+-\frac{1}{4}log_2\frac{1}{8}= 1.75bits</script></li>
+<li>熵等于最短的平均编码长度<br>对于状态（a，b，c，d）我们给出现概率高的状态较短的编码出现概率低的较长的编码就可以使编码长度最短。我们用0表示a，10表示b，110表示c，111表示d<br>则平均编码长度为<script type="math/tex">\frac{1}{2}+\frac{1}{4}*2+\frac{1}{4}*3 = 1.75bits = H[x]</script></li>
+</ul>
+<p>以上是信息论定义的熵，之后采用的熵都是热力学中定义的即将对数改为自然对数。<br><img src="/2022/10/22/prml1.2/10.jpg" alt></p>
+<h3 id="微分熵"><a href="#微分熵" class="headerlink" title="微分熵"></a>微分熵</h3><p>我们将离散变为连续。假设在dx区间内$p(x)$几乎不变则在这区间内概率是$p(x)dx$，上式变为：</p>
+<script type="math/tex; mode=display">H[p] =  -\int_x p(x)dxln(p(x)dx) = - \int_x p(x)lnp(x)dx-ln(dx)</script><p>可以看到当dx无穷小时，熵趋向于无穷，具体化一个连续变量需要无穷比特。第二项跟量化的程度有关而第一项跟概率密度有关。则此时定义微分熵用于描述概率密度信息量：</p>
+<script type="math/tex; mode=display">H[x] =- \int_x p(x)lnp(x)dx</script><p>这个微分熵是$p(x)$的泛函。$p(x)$要满足归一化，一阶矩和二阶矩的限制，我们可以通过拉格朗日乘除法得到最大化微分熵的概率分布是高斯分布。<br><img src="/2022/10/22/prml1.2/11.png" alt><br>这个式子对$p(x),\lambda_1,\lambda_2,\lambda_3$求导为0。对p（x）求导要用到上面提到的变分法只用看积分内的导数为0：<br><img src="/2022/10/22/prml1.2/12.png" alt><br>带入限制条件就可以知道$p(x)$是均值为$\mu$方差为$\sigma^2$的高斯分布。</p>
+<h3 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h3><p>假设我们有联合概率分布$p(x,y)$知道了x（即$p(x)$）要求y的话，需要附加条件概率密度$p(y \vert x)$的信息。附加的信息定义为条件熵：<br><img src="/2022/10/22/prml1.2/13.png" alt></p>
+<script type="math/tex; mode=display">\int p(y \vert x) dy= 1</script><script type="math/tex; mode=display">H[x] = \int p(x)lnp(x)dx = \int\int p(x)p(y \vert x)lnp(x) dxdy</script><script type="math/tex; mode=display">H[x,y] = H[x]+H[y \vert x]</script><p>描述x，y的消息等于x的消息加上y对x的条件熵。</p>
+<h3 id="相对熵（KL散度）"><a href="#相对熵（KL散度）" class="headerlink" title="相对熵（KL散度）"></a>相对熵（KL散度）</h3><p>考虑某个未知的分布$p(x)$，假定我们已经使⽤⼀个分布$q(x)$去近似他。</p>
+<ul>
+<li>为啥要这样做？<br>我们有一堆数据x通过真实的$p(x)$生成。我们没办法得到他的解析式。所以需要一个概率去近似他，例如我可以用高斯分布去近似，只需要求出这堆数据的均值和方差，我们就可以用高斯分布近似了。但这样准确吗？不一定准确，可能会丢失一些信息。这时我们还需要附加一些信息，我们附加的信息量（丢失的信息量）称为相对熵即KL散度。<br><img src="/2022/10/22/prml1.2/14.png" alt></li>
+</ul>
+<p>$-lnq(x)$是$q(x)$所含信息乘上真实概率$p(x)$而不是乘$q(x)$。$q(x)$与$p(x)$恒等时，KL散度为0。KL散度是恒大于0的，可以来表示两个概率相关性。以下为证明：<br>凸函数性质有：<br><img src="/2022/10/22/prml1.2/15.png" alt></p>
+<script type="math/tex; mode=display">\lambda_i > 0 \sum_i \lambda_i = 1</script><p>可以把$\lambda_i$看作概率分布，并转变为连续变量，可以得到Jensen不等式：<br><img src="/2022/10/22/prml1.2/16.png" alt><br>$-lnx$是严格凸函数故有：<br><img src="/2022/10/22/prml1.2/17.png" alt><br>我们可以用kl散度来确定x，y的独立性：<br><img src="/2022/10/22/prml1.2/18.png" alt><br>I被称作变量x，y的相互信息，x，y独立I等于0</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">molo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://molo333.github.io/2022/10/22/prml1.2/">http://molo333.github.io/2022/10/22/prml1.2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2022/10/12/prml1.1/"><span>prml第一章笔记上</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(/p/1.png)"><div class="layout" id="footer"><div class="copyright">&copy;2022 By molo</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
