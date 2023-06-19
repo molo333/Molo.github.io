@@ -23,7 +23,10 @@ c &= \frac{p(x,z \vert \theta)}{q(z)}
 \\c &= p(x \vert\theta)\\
 q(z) &=  \frac{p(x,z \vert \theta)}{p(x \vert\theta)} = p(z \vert x,\theta)
 \end{aligned}</script><p>即得到狭义的EM算法：<br>选择$q(z)$使下界$ELBO$等于对数似然函数$\ln p(x \vert \theta)$，然后关于$\theta$最大化下界ELBO。得到的新的$\theta$对应的ELBO就能大于旧的$\theta$对应的ELBO，这样新的对数似然$\ln p(x\vert \theta)$大于旧的$\ln p(x\vert \theta)$。从而使对数似然函数变大。<br><img src="/2023/06/01/prml%20EM/1.png" alt><br>E步骤：<br>找到$q(z) = p(z \vert x,\theta^*)$<br>M步骤：</p>
-<script type="math/tex; mode=display">\theta^* = \arg\max_{\theta} (E_{q(z)}[\ln \frac{p(x,z \vert \theta)}{q(z)}])</script><p>考虑以下分解方法(引入潜在变量分布q(x)，想办法凑出上面我们得到的下界):</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\theta^* &= \arg\max_{\theta} (E_{q(z)}[\ln \frac{p(x,z \vert \theta)}{q(z)}])\\
+& = \arg\max_{\theta} (E_{q(z)}[\ln p(x,z \vert \theta)])
+\end{aligned}</script><p>考虑以下分解方法(引入潜在变量分布q(x)，想办法凑出上面我们得到的下界):</p>
 <script type="math/tex; mode=display">\begin{aligned}
     \ln p(x\vert \theta) &= \ln p(x,z \vert \theta) - \ln p(z \vert x, \theta)\\
     & = \ln \frac{p(x,z \vert \theta)}{q(z)} - \ln \frac{p(z \vert x, \theta)}{q(z)}\\
@@ -33,7 +36,7 @@ q(z) &=  \frac{p(x,z \vert \theta)}{p(x \vert\theta)} = p(z \vert x,\theta)
 <script type="math/tex; mode=display">q =  \arg\min_{q}KL(q \vert \vert p)</script><p>M步骤：</p>
 <script type="math/tex; mode=display">\theta^* = \arg\max_{\theta} (E_{q(z)}[\ln \frac{p(x,z \vert \theta)}{q(z)}])</script><h2 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h2><p>高斯混合模型是将多个的高斯分布进行线性叠加的概率模型。他认为得到的数据分为好多类，每一类服从特定均值和方差的高斯分布。他能更好的描述多峰的分布。<br><img src="/2023/06/01/prml%20EM/2.png" alt><br>上图可以看到，数据集($x_1,x_2…x_n…x_N$)（绿色数据点）主要聚集成两类，混合高斯模型可以很好的拟合。<br>假设我们有数据集($x_1,x_2…x_n…x_N$)，引入各聚类的均值$\mu_k$和方差$\Sigma_k$。高斯混合模型的边缘概率密度：</p>
 <script type="math/tex; mode=display">
-p(x_n \vert \pi,\mu,\Sigma) = \sum_{k = 1}^K \pi_k N(x_n \vert \mu_k,\Sigma_k)</script><p>引入n个K维的二值随机隐含变量$z_n$，每一个$z_n$中只有一个特殊的$z_{nk}$等于1其余为0。他来描述第n个数据被分为哪一类，若$z_{nk}= 1$则说明第n个数据$\mathbf x_n$属于第k类，$z_n$服从多项式分布。</p>
+ p(x_n \vert \pi,\mu,\Sigma) =  \sum_{k = 1}^K \pi_k N(x_n \vert \mu_k,\Sigma_k)</script><p>引入n个K维的二值随机隐含变量$z_n$，每一个$z_n$中只有一个特殊的$z_{nk}$等于1其余为0。他来描述第n个数据被分为哪一类，若$z_{nk}= 1$则说明第n个数据$\mathbf x_n$属于第k类，$z_n$服从多项式分布。</p>
 <script type="math/tex; mode=display">\begin{aligned}
     &p(z_{nk} = 1) = \pi_k &\sum_k^K \pi_k = 1
 \end{aligned}</script><p>$z_{nk} = 1$时第n个数据点数据点$x_n$被分为k类，服从$\mu_k,\Sigma_k$的高斯分布。就是说似然函数是：</p>
@@ -43,11 +46,11 @@ p(x_n \vert \pi,\mu,\Sigma) = \sum_{k = 1}^K \pi_k N(x_n \vert \mu_k,\Sigma_k)</
     & = \frac{\pi_kN(x_n \vert \mu_k,\Sigma_k)}{\sum_{j = 1}^K \pi_j N(x_n \vert \mu_j,\Sigma_j)}
 \end{aligned}</script><p>多维高斯分布有：<br><img src="/2023/06/01/prml%20EM/3.png" alt><br>完整对数似然函数是：</p>
 <script type="math/tex; mode=display">\begin{aligned}
-     \ln p(\mathbf{x},\mathbf{z} \vert \pi,\mu,\Sigma) &= \ln \prod_{n=1}^N \prod_{k=1}^K (p(x_n \vert z_{nk} )p(z_{nk}))^{z_{nk}}\\& 
+     \ln p(\mathbf{x},\mathbf{z} \vert \pi,\mu,\Sigma) &= \ln \prod_{n=1}^N \prod_{k=1}^K (\pi_kN(x_n \vert \mu_k,\Sigma_k))^{z_{nk}}\\& 
      = \sum_{n=1}^N\sum_{k=1}^K z_{nk} (\ln \pi_k N(x_n \vert \mu_k,\Sigma_k))\\& = \sum_{n=1}^N\sum_{k=1}^K z_{nk} (\ln \pi_k  -\frac{1}{2}(x_n - \mu_k)^T\Sigma_k^{-1}(x_n - \mu_k)-\frac{1}{2} \ln \vert \Sigma_k \vert) +C
 \end{aligned}</script><p>C是与参数无关的常数；ELBO为：</p>
 <script type="math/tex; mode=display">\begin{aligned}
-    &E_{q(z)}[\sum_{n=1}^N\sum_{k=1}^K z_{nk} (\ln \pi_k  -\frac{1}{2}(x_n - \mu_k)^T\Sigma_k^{-1}(x_n - \mu_k)-\frac{1}{2} \ln \vert \Sigma_k \vert) + C ]
+    &E_{q(z)}[\ln p(\mathbf{x},\mathbf{z} \vert \pi,\mu,\Sigma)]= E_{q(z)}[\sum_{n=1}^N\sum_{k=1}^K z_{nk} (\ln \pi_k  -\frac{1}{2}(x_n - \mu_k)^T\Sigma_k^{-1}(x_n - \mu_k)-\frac{1}{2} \ln \vert \Sigma_k \vert) + C ]
 \\ & = \sum_{n=1}^N\sum_{k=1}^K q(z_{nk} = 1) (\ln \pi_k  -\frac{1}{2}(x_n - \mu_k)^T\Sigma_k^{-1}(x_n - \mu_k)-\frac{1}{2} \ln \vert \Sigma_k \vert) + C
 \end{aligned}</script><p>对各参数（$\mu_k,\Sigma_k$）求导:<br>对$\mu_k,\Sigma_k$求导会遇到二项式求导的问题：</p>
 <script type="math/tex; mode=display">
